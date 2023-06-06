@@ -11,7 +11,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Main Screen"
+        title = R.string.localizable.projectName()
         view.backgroundColor = .white
         // Do any additional setup after loading the view.
     }
