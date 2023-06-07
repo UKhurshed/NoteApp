@@ -7,3 +7,20 @@
 */
 
 "projectName" = "NoteApp";
+
+"delete" = "Delete";
+"titleErrorLabel" = "An error has occurred";
+"alertDismiss" = "Cancel";
+"tryAgain" = "Try again";
+
+"textFieldDescription" = "New note description";
+"addNewNote" = "Add new note";
+"addNote" = "Add note";
+"priority" = "Priority";
+
+"low" = "Low";
+"normal" = "Normal";
+"high" = "High";
+
+
+
