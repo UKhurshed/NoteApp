@@ -23,5 +23,14 @@
 "high" = "High";
 "editNote" = "Edit note";
 
+"newsFeed" = "News Feed";
+"jsonParseError" = "Json parse error";
+"urlConvertIsNull" = "Url convert is null";
+"dataFromDataTaskIsNull" = "Data from dataTask is null";
+"thereIsNoInternetConnection" = "There is no internet connection";
+"networkSessionError" = "Network session error was occurred";
+"freedReference" = "The arc reference was nil";
+"serviceWasNil" = "Service instance was nil";
+
 
 

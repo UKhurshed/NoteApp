@@ -25,7 +25,7 @@ class EditNoteUIView: UIView {
     private let editTaskBtn = UIButton()
     
     weak var delegate: EditNoteUIViewDelegate?
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
@@ -158,7 +158,5 @@ class EditNoteUIView: UIView {
         textField.text = note
         prioritySegmentControl.selectedSegmentIndex = priority
         setupColor(priority: priority)
-        
     }
-
 }

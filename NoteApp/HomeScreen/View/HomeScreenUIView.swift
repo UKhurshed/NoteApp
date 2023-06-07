@@ -18,7 +18,7 @@ class HomeScreenUIView: UIView {
     private let noteTableView = UITableView()
     private let noDataImage = UIImageView()
     
-    var result = [NoteEntity]()
+    private var result = [NoteEntity]()
     
     weak var delegate: HomeScreenUIViewDelegate?
 
