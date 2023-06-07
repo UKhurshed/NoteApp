@@ -24,10 +24,10 @@ class HomeScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = R.string.localizable.projectName()
+        homeScreenUIView.delegate = self
         configureNavBar()
         
         configuration()
-    
     }
     
     private func configuration() {
@@ -72,5 +72,18 @@ class HomeScreenViewController: UIViewController {
             }))
             self.present(alert, animated: true)
         }
+    }
+}
+
+extension HomeScreenViewController: HomeScreenUIViewDelegate {
+    func noteItemTapped(note: NoteEntity) {
+        let editVC = EditNoteViewController(note: note, successCompletion: {
+            self.homeViewModel.getAllNotes()
+        })
+        navigationController?.pushViewController(editVC, animated: true)
+    }
+    
+    func deleteNote(note: NoteEntity) {
+        homeViewModel.deleteNote(note: note)
     }
 }

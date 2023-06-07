@@ -43,8 +43,7 @@ class CoreDataManager {
         let note = NoteEntity(context: viewContext)
         note.note = noteLabel
         note.createdAt = Date()
-        note.isComplete = false
-        note.priority = Int32(priority)
+        note.priority = Int16(priority)
     
         try viewContext.save()
        
@@ -65,7 +64,7 @@ class CoreDataManager {
     
     func updateNote(note: NoteEntity, newNote: String, priority: Int) throws {
         note.note = newNote
-        note.priority = Int32(priority)
+        note.priority = Int16(priority)
         
         try viewContext.save()
     }

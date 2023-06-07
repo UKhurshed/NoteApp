@@ -20,7 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        let nav = UINavigationController(rootViewController: HomeScreenViewController())
+        let homeVC = HomeScreenViewController()
+        homeVC.navigationItem.backButtonTitle = ""
+        let nav = UINavigationController(rootViewController: homeVC)
         nav.navigationBar.prefersLargeTitles = true
         window.rootViewController = nav
         window.makeKeyAndVisible()

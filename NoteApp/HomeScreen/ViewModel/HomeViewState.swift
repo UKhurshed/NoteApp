@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ViewState {
+enum HomeViewState {
     case success(notes: [NoteEntity])
     case failure(errorMessage: String)
 }

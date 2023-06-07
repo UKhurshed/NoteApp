@@ -8,12 +8,19 @@
 import UIKit
 import SnapKit
 
+protocol HomeScreenUIViewDelegate: AnyObject {
+    func noteItemTapped(note: NoteEntity)
+    func deleteNote(note: NoteEntity)
+}
+
 class HomeScreenUIView: UIView {
     
     private let noteTableView = UITableView()
     private let noDataImage = UIImageView()
     
     var result = [NoteEntity]()
+    
+    weak var delegate: HomeScreenUIViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -83,12 +90,12 @@ extension HomeScreenUIView: UITableViewDataSource {
 extension HomeScreenUIView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        delegate?.taskTapped(task: self.result[indexPath.row])
+        delegate?.noteItemTapped(note: self.result[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: R.string.localizable.delete()) { _, _, _ in
-//            self.delegate?.deleteTask(task: self.result[indexPath.row])
+            self.delegate?.deleteNote(note: self.result[indexPath.row])
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }

@@ -2,7 +2,7 @@
 //  NoteEntity+CoreDataProperties.swift
 //  NoteApp
 //
-//  Created by Khurshed Umarov on 06.06.2023.
+//  Created by Khurshed Umarov on 07.06.2023.
 //
 //
 
@@ -18,8 +18,7 @@ extension NoteEntity {
 
     @NSManaged public var createdAt: Date?
     @NSManaged public var note: String?
-    @NSManaged public var priority: Int32
-    @NSManaged public var isComplete: Bool
+    @NSManaged public var priority: Int16
 
 }
 

@@ -1,19 +1,20 @@
 //
-//  AddNoteViewController.swift
+//  EditNoteViewController.swift
 //  NoteApp
 //
-//  Created by Khurshed Umarov on 06.06.2023.
+//  Created by Khurshed Umarov on 07.06.2023.
 //
 
 import UIKit
 
-class AddNoteViewController: UIViewController {
+class EditNoteViewController: UIViewController {
     
-    private let addNoteViewModel = AddNoteViewModel()
-    
+    private let editViewModel = EditViewModelImpl()
+    private let noteEntity: NoteEntity
     private let successCompletion: () -> Void
     
-    init(successCompletion: @escaping () -> Void) {
+    init(note: NoteEntity, successCompletion: @escaping () -> Void) {
+        self.noteEntity = note
         self.successCompletion = successCompletion
         super.init(nibName: nil, bundle: nil)
     }
@@ -22,36 +23,41 @@ class AddNoteViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private var addNoteUIView: AddNoteUIView {
-        self.view as! AddNoteUIView
+    private var editNoteUIView: EditNoteUIView {
+        self.view as! EditNoteUIView
     }
     
     override func loadView() {
-        view = AddNoteUIView()
+        view = EditNoteUIView()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = R.string.localizable.editNote()
+        editNoteUIView.delegate = self
         
-        addNoteUIView.delegate = self
+        observeEvent()
         
-        addNoteViewModel.eventHandle = { [weak self] event in
+        editNoteUIView.setupData(note: noteEntity.note ?? "", priority: Int(noteEntity.priority))
+    }
+    
+    private func observeEvent() {
+        editViewModel.eventHandler = { [weak self] event in
             guard let self else { return }
             
             switch event {
             case .success:
                 successCompletion()
-                self.dismiss(animated: true)
+                navigationController?.popViewController(animated: true)
                 break
             case .failure(let errorMessage):
                 self.presentAlertError(message: errorMessage)
                 break
             }
         }
-        
     }
     
-    func presentAlertError(message: String) {
+    private func presentAlertError(message: String) {
         print("error message: \(message)")
         DispatchQueue.main.async {
             let alert  = UIAlertController(title: R.string.localizable.titleErrorLabel(), message: message, preferredStyle: .alert)
@@ -59,11 +65,10 @@ class AddNoteViewController: UIViewController {
             self.present(alert, animated: true)
         }
     }
-
 }
 
-extension AddNoteViewController: AddNoteUIViewDelegate {
-    func addNote(note: String, priority: Int) {
-        addNoteViewModel.addNote(note: note, priority: priority)
+extension EditNoteViewController: EditNoteUIViewDelegate {
+    func editTapped(note: String, priority: Int) {
+        editViewModel.editNote(noteEntity: self.noteEntity, note: note, priority: priority)
     }
 }

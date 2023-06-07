@@ -1,19 +1,19 @@
 //
-//  AddNoteUIView.swift
+//  EditNoteUIView.swift
 //  NoteApp
 //
-//  Created by Khurshed Umarov on 06.06.2023.
+//  Created by Khurshed Umarov on 07.06.2023.
 //
 
 import UIKit
 
-protocol AddNoteUIViewDelegate: AnyObject {
-    func addNote(note: String, priority: Int)
+protocol EditNoteUIViewDelegate: AnyObject {
+    func editTapped(note: String, priority: Int)
 }
 
-class AddNoteUIView: UIView {
+class EditNoteUIView: UIView {
     
-    private let addLabel = UILabel()
+    private let editLabel = UILabel()
     private let textField = UITextField()
     private let priorityLabel = UILabel()
     private let prioritySegmentControl = UISegmentedControl(
@@ -22,29 +22,28 @@ class AddNoteUIView: UIView {
             R.string.localizable.normal(),
             R.string.localizable.high()]
     )
-    private let addTaskBtn = UIButton()
+    private let editTaskBtn = UIButton()
     
-    weak var delegate: AddNoteUIViewDelegate?
+    weak var delegate: EditNoteUIViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
         
-        initAddLabel()
         initTextField()
         initProiorityLabel()
         initPrioritySegmentControl()
-        initAddTaskBtn()
+        initEditTaskBtn()
     }
     
-    private func initAddLabel() {
-        addLabel.translatesAutoresizingMaskIntoConstraints = false
-        addLabel.text = R.string.localizable.addNote()
-        addLabel.font = .systemFont(ofSize: 26, weight: .bold)
+    private func initEditLabel() {
+        editLabel.translatesAutoresizingMaskIntoConstraints = false
+        editLabel.text = R.string.localizable.editNote()
+        editLabel.font = .systemFont(ofSize: 26, weight: .bold)
         
-        addSubview(addLabel)
-        addLabel.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
+        addSubview(editLabel)
+        editLabel.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(0)
             make.leading.equalToSuperview().offset(20)
         }
     }
@@ -62,7 +61,7 @@ class AddNoteUIView: UIView {
         
         addSubview(textField)
         textField.snp.makeConstraints { make in
-            make.top.equalTo(addLabel.snp.bottom).offset(30)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
             make.leading.equalToSuperview().offset(15)
             make.trailing.equalToSuperview().offset(-15)
             make.height.equalTo(50)
@@ -84,9 +83,6 @@ class AddNoteUIView: UIView {
     
     private func initPrioritySegmentControl() {
         prioritySegmentControl.translatesAutoresizingMaskIntoConstraints = false
-        prioritySegmentControl.selectedSegmentIndex = 1
-        prioritySegmentControl.selectedSegmentTintColor = .orange
-        
         prioritySegmentControl.addTarget(self, action: #selector(colorChanged), for: .valueChanged)
         
         addSubview(prioritySegmentControl)
@@ -100,30 +96,30 @@ class AddNoteUIView: UIView {
         switch prioritySegmentControl.selectedSegmentIndex {
         case 0:
             prioritySegmentControl.selectedSegmentTintColor = .green
-            addTaskBtn.backgroundColor = .green
+            editTaskBtn.backgroundColor = .green
         case 1:
             prioritySegmentControl.selectedSegmentTintColor = .orange
-            addTaskBtn.backgroundColor = .orange
+            editTaskBtn.backgroundColor = .orange
         case 2:
             prioritySegmentControl.selectedSegmentTintColor = .red
-            addTaskBtn.backgroundColor = .red
+            editTaskBtn.backgroundColor = .red
         default:
             prioritySegmentControl.selectedSegmentTintColor = .orange
-            addTaskBtn.backgroundColor = .orange
+            editTaskBtn.backgroundColor = .orange
         }
     }
     
-    private func initAddTaskBtn() {
-        addTaskBtn.translatesAutoresizingMaskIntoConstraints = false
-        addTaskBtn.translatesAutoresizingMaskIntoConstraints = false
-        addTaskBtn.setTitle(R.string.localizable.addNewNote(), for: .normal)
-        addTaskBtn.setTitleColor(.black, for: .normal)
-        addTaskBtn.backgroundColor = .orange
-        addTaskBtn.layer.cornerRadius = 10
-        addTaskBtn.addTarget(self, action: #selector(addNoteTapped), for: .touchUpInside)
+    private func initEditTaskBtn() {
+        editTaskBtn.translatesAutoresizingMaskIntoConstraints = false
+        editTaskBtn.translatesAutoresizingMaskIntoConstraints = false
+        editTaskBtn.setTitle(R.string.localizable.addNewNote(), for: .normal)
+        editTaskBtn.setTitleColor(.black, for: .normal)
+        editTaskBtn.backgroundColor = .orange
+        editTaskBtn.layer.cornerRadius = 10
+        editTaskBtn.addTarget(self, action: #selector(editNoteTapped), for: .touchUpInside)
         
-        addSubview(addTaskBtn)
-        addTaskBtn.snp.makeConstraints { make in
+        addSubview(editTaskBtn)
+        editTaskBtn.snp.makeConstraints { make in
             make.top.equalTo(prioritySegmentControl.snp.bottom).offset(30)
             make.leading.equalToSuperview().offset(15)
             make.trailing.equalToSuperview().offset(-15)
@@ -131,11 +127,38 @@ class AddNoteUIView: UIView {
         }
     }
     
-    @objc private func addNoteTapped() {
-        delegate?.addNote(note: textField.text ?? "", priority: prioritySegmentControl.selectedSegmentIndex)
+    @objc private func editNoteTapped() {
+        delegate?.editTapped(note: textField.text ?? "", priority: prioritySegmentControl.selectedSegmentIndex)
     }
-
+    
+    private func setupColor(priority: Int) {
+        switch priority {
+        case 0:
+            prioritySegmentControl.selectedSegmentTintColor = .green
+            editTaskBtn.backgroundColor = .green
+        case 1:
+            prioritySegmentControl.selectedSegmentTintColor = .orange
+            editTaskBtn.backgroundColor = .orange
+        case 2:
+            prioritySegmentControl.selectedSegmentTintColor = .red
+            editTaskBtn.backgroundColor = .red
+        default:
+            prioritySegmentControl.selectedSegmentTintColor = .orange
+            editTaskBtn.backgroundColor = .orange
+            
+        }
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+    public func setupData(note: String, priority: Int) {
+        textField.text = note
+        prioritySegmentControl.selectedSegmentIndex = priority
+        setupColor(priority: priority)
+        
+    }
+
 }

@@ -21,6 +21,15 @@ class HomeViewModel {
             eventHandler?(.error(errorMessage: error.localizedDescription))
         }
     }
+    
+    func deleteNote(note: NoteEntity) {
+        do  {
+            try CoreDataManager.shared.deleteNote(note: note)
+            getAllNotes()
+        } catch let error {
+            eventHandler?(.error(errorMessage: error.localizedDescription))
+        }
+    }
 }
 
 extension HomeViewModel {

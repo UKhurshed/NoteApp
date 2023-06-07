@@ -13,12 +13,14 @@ class NoteTableViewCell: UITableViewCell {
     static let identifier = "NoteTableViewCell"
     
     private let note = UILabel()
+    private let indicatorBackView = UIView()
     private let priorityIndicator = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         initNote()
+        initIndicatorBackView()
         initPriorityIndicator()
     }
     
@@ -32,13 +34,29 @@ class NoteTableViewCell: UITableViewCell {
         }
     }
     
+    private func initIndicatorBackView() {
+        indicatorBackView.translatesAutoresizingMaskIntoConstraints = false
+        indicatorBackView.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(indicatorTapped)))
+        
+        contentView.addSubview(indicatorBackView)
+        indicatorBackView.snp.makeConstraints { make in
+            make.height.width.equalTo(25)
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-15)
+        }
+    }
+    
+    @objc func indicatorTapped() {
+        print("indicatorTapped")
+    }
+    
     private func initPriorityIndicator() {
         priorityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
-        contentView.addSubview(priorityIndicator)
+        indicatorBackView.addSubview(priorityIndicator)
         priorityIndicator.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-15)
             make.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
             make.height.width.equalTo(10)
         }
         
@@ -67,5 +85,4 @@ class NoteTableViewCell: UITableViewCell {
         priorityIndicator.backgroundColor = getPriorityColor(priority: Int(noteEntity.priority))
         
     }
-
 }
