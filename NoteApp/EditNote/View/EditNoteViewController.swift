@@ -74,7 +74,8 @@ extension EditNoteViewController: EditNoteUIViewDelegate {
                 title: R.string.localizable.warningTitle(),
                 message: R.string.localizable.noteIsEmpty(),
                 actionStr: R.string.localizable.ok())
+        } else {
+            editViewModel.editNote(noteEntity: self.noteEntity, note: note, priority: priority)
         }
-        editViewModel.editNote(noteEntity: self.noteEntity, note: note, priority: priority)
     }
 }

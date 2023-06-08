@@ -101,6 +101,7 @@ class NewsUIView: UIView {
             newsTableView.isHidden = false
             newsTableView.reloadData()
         }
+        searchBar.endEditing(true)
     }
 }
 

@@ -12,12 +12,12 @@ extension UIViewController {
         print("error message: \(message)")
         DispatchQueue.main.async {
             let alert  = UIAlertController(
-                title: R.string.localizable.titleErrorLabel(),
+                title: title,
                 message: message,
                 preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(
-                title: R.string.localizable.alertDismiss(),
+                title: actionStr,
                 style: .cancel,
                 handler: nil))
             

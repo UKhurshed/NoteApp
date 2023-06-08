@@ -29,7 +29,8 @@ class NoteTableViewCell: UITableViewCell {
         
         contentView.addSubview(note)
         note.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(10)
+            make.leading.equalToSuperview().offset(25)
             make.centerY.equalToSuperview()
         }
     }

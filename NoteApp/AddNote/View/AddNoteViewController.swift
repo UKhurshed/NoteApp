@@ -62,7 +62,8 @@ extension AddNoteViewController: AddNoteUIViewDelegate {
                 title: R.string.localizable.warningTitle(),
                 message: R.string.localizable.noteIsEmpty(),
                 actionStr: R.string.localizable.ok())
+        } else {
+            addNoteViewModel.addNote(note: note, priority: priority)
         }
-        addNoteViewModel.addNote(note: note, priority: priority)
     }
 }
