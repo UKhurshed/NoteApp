@@ -44,26 +44,25 @@ class AddNoteViewController: UIViewController {
                 self.dismiss(animated: true)
                 break
             case .failure(let errorMessage):
-                self.presentAlertError(message: errorMessage)
+                self.presentAlertError(
+                    title: R.string.localizable.titleErrorLabel(),
+                    message: errorMessage,
+                    actionStr: R.string.localizable.alertDismiss())
                 break
             }
         }
         
     }
-    
-    func presentAlertError(message: String) {
-        print("error message: \(message)")
-        DispatchQueue.main.async {
-            let alert  = UIAlertController(title: R.string.localizable.titleErrorLabel(), message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: R.string.localizable.alertDismiss(), style: .cancel, handler: nil))
-            self.present(alert, animated: true)
-        }
-    }
-
 }
 
 extension AddNoteViewController: AddNoteUIViewDelegate {
     func addNote(note: String, priority: Int) {
+        if note.isEmpty {
+            self.presentAlertError(
+                title: R.string.localizable.warningTitle(),
+                message: R.string.localizable.noteIsEmpty(),
+                actionStr: R.string.localizable.ok())
+        }
         addNoteViewModel.addNote(note: note, priority: priority)
     }
 }

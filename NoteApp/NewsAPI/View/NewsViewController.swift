@@ -63,29 +63,12 @@ class NewsViewController: UIViewController {
             }
         }
     }
-    
-    func presentAlertError(title: String, message: String, actionStr: String) {
-        print("error message: \(message)")
-        DispatchQueue.main.async {
-            let alert  = UIAlertController(
-                title: R.string.localizable.titleErrorLabel(),
-                message: message,
-                preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(
-                title: R.string.localizable.alertDismiss(),
-                style: .cancel,
-                handler: nil))
-            
-            self.present(alert, animated: true)
-        }
-    }
 }
 
 extension NewsViewController: NewsUIViewDelegate {
     func searchEnding(text: String) {
         if text.isEmpty {
-            presentAlertError(
+            self.presentAlertError(
                 title: R.string.localizable.warningTitle(),
                 message: R.string.localizable.wrongURL(),
                 actionStr: R.string.localizable.ok())
@@ -95,7 +78,7 @@ extension NewsViewController: NewsUIViewDelegate {
     
     func newsItemTapped(news: ViewData) {
         guard let url = URL(string: news.url ?? "") else {
-            presentAlertError(
+            self.presentAlertError(
                 title: R.string.localizable.warningTitle(),
                 message: R.string.localizable.wrongURL(),
                 actionStr: R.string.localizable.alertDismiss())

@@ -69,6 +69,12 @@ class EditNoteViewController: UIViewController {
 
 extension EditNoteViewController: EditNoteUIViewDelegate {
     func editTapped(note: String, priority: Int) {
+        if note.isEmpty {
+            self.presentAlertError(
+                title: R.string.localizable.warningTitle(),
+                message: R.string.localizable.noteIsEmpty(),
+                actionStr: R.string.localizable.ok())
+        }
         editViewModel.editNote(noteEntity: self.noteEntity, note: note, priority: priority)
     }
 }

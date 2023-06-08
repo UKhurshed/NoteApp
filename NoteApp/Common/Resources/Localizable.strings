@@ -38,5 +38,7 @@
 "searchTextIsEmpty" = "Search text is empty, please enter correct data";
 "ok" = "Ok";
 
+"noteIsEmpty" = "Note is empty, please fill in the field";
+
 
 
