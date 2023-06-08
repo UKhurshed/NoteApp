@@ -32,8 +32,7 @@
 API может быть любым, выбирайте на свой вкус. Он должен добавлять дополнительный функционал к вашему приложению. Сами заметки должны храниться в базе данных, как указано в первом пункте.
 Опубликуйте исходный код в Github и предоставьте ссылку на репозиторий по завершению разработки.
 По возможности напишите документацию к вашему проекту. <br />
-Screenshots! <br /> [note_screen](https://github.com/UKhurshed/NoteApp/assets/26713598/93aeb6c7-3fcc-4c2d-8c38-6823cc099aa0) <br />
-
+Screenshots! <br /> [note_screen](https://github.com/UKhurshed/NoteApp/assets/26713598/93aeb6c7-3fcc-4c2d-8c38-6823cc099aa0) 
 [newsapi_screen](https://github.com/UKhurshed/NoteApp/assets/26713598/6c26a377-eda9-4228-90a5-79d0c20b1dd5) <br />
 Используемые библиотеки:
 1. R.swift  <br />
