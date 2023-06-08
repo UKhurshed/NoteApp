@@ -34,6 +34,13 @@ API может быть любым, выбирайте на свой вкус. �
 По возможности напишите документацию к вашему проекту. <br />
 Screenshots! <br /> [note_screen](https://github.com/UKhurshed/NoteApp/assets/26713598/93aeb6c7-3fcc-4c2d-8c38-6823cc099aa0) <br />
 
-[newsapi_screen](https://github.com/UKhurshed/NoteApp/assets/26713598/6c26a377-eda9-4228-90a5-79d0c20b1dd5)
+[newsapi_screen](https://github.com/UKhurshed/NoteApp/assets/26713598/6c26a377-eda9-4228-90a5-79d0c20b1dd5) <br />
+Используемые библиотеки:<br />
+1. R.swift - <br />
+2. SnapKit <br />
+3. Alamofire <br />
+4. SwiftyJSON <br />
+5. JGProgressHUD <br />
+6. SDWebImage
 
 
