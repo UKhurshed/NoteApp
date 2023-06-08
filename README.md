@@ -34,7 +34,6 @@ API может быть любым, выбирайте на свой вкус. �
 По возможности напишите документацию к вашему проекту. <br />
 Screenshots! <br /> [note_screen](https://github.com/UKhurshed/NoteApp/assets/26713598/93aeb6c7-3fcc-4c2d-8c38-6823cc099aa0) <br />
 
-![newsapi_screen](https://github.com/UKhurshed/NoteApp/assets/26713598/a063993c-4274-437c-a3bb-f72a2097cb89)
-ts/26713598/3bd6984d-56e3-4c2b-858b-d3daa2bff2ff)
+![newsapi_screen](https://github.com/UKhurshed/NoteApp/assets/26713598/6c26a377-eda9-4228-90a5-79d0c20b1dd5)
 
 
