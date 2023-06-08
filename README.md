@@ -31,9 +31,10 @@
 Используйте базу данных для хранения заметок. Выберите подходящую базу данных, такую как SQLite для Android и Core Data для iOS.
 API может быть любым, выбирайте на свой вкус. Он должен добавлять дополнительный функционал к вашему приложению. Сами заметки должны храниться в базе данных, как указано в первом пункте.
 Опубликуйте исходный код в Github и предоставьте ссылку на репозиторий по завершению разработки.
-По возможности напишите документацию к вашему проекту.
-Screenshots
-![note_screen](https://github.com/UKhurshed/NoteApp/asse![newsapi_screen]
+По возможности напишите документацию к вашему проекту. <br />
+Screenshots! <br /> [note_screen](https://github.com/UKhurshed/NoteApp/assets/26713598/93aeb6c7-3fcc-4c2d-8c38-6823cc099aa0) <br />
+
+![newsapi_screen]
 (https://github.com/UKhurshed/NoteApp/assets/26713598/a063993c-4274-437c-a3bb-f72a2097cb89)
 ts/26713598/3bd6984d-56e3-4c2b-858b-d3daa2bff2ff)
 
