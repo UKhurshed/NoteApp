@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class NewsViewController: UIViewController {
     
@@ -27,14 +28,12 @@ class NewsViewController: UIViewController {
     override func loadView() {
         view = NewsUIView()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         observeEvent()
         
         newsUIView.delegate = self
-        
-//        viewModel.getNews(query: "tesla")
     }
     
     private func observeEvent() {
@@ -55,17 +54,29 @@ class NewsViewController: UIViewController {
             case .failure(let errorMessage):
                 DispatchQueue.main.async {
                     self.newsUIView.errorOccurred()
-                    self.presentAlertError(message: errorMessage)
                 }
+                self.presentAlertError(
+                    title: R.string.localizable.titleErrorLabel(),
+                    message: errorMessage,
+                    actionStr: R.string.localizable.alertDismiss())
+                
             }
         }
     }
     
-    func presentAlertError(message: String) {
+    func presentAlertError(title: String, message: String, actionStr: String) {
         print("error message: \(message)")
         DispatchQueue.main.async {
-            let alert  = UIAlertController(title: R.string.localizable.titleErrorLabel(), message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: R.string.localizable.alertDismiss(), style: .cancel, handler: nil))
+            let alert  = UIAlertController(
+                title: R.string.localizable.titleErrorLabel(),
+                message: message,
+                preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(
+                title: R.string.localizable.alertDismiss(),
+                style: .cancel,
+                handler: nil))
+            
             self.present(alert, animated: true)
         }
     }
@@ -73,7 +84,25 @@ class NewsViewController: UIViewController {
 
 extension NewsViewController: NewsUIViewDelegate {
     func searchEnding(text: String) {
+        if text.isEmpty {
+            presentAlertError(
+                title: R.string.localizable.warningTitle(),
+                message: R.string.localizable.wrongURL(),
+                actionStr: R.string.localizable.ok())
+        }
         viewModel.getNews(query: text)
     }
-
+    
+    func newsItemTapped(news: ViewData) {
+        guard let url = URL(string: news.url ?? "") else {
+            presentAlertError(
+                title: R.string.localizable.warningTitle(),
+                message: R.string.localizable.wrongURL(),
+                actionStr: R.string.localizable.alertDismiss())
+            return
+        }
+        
+        let vc = SFSafariViewController(url: url)
+        present(vc, animated: true)
+    }
 }

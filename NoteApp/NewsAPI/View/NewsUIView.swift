@@ -10,6 +10,7 @@ import JGProgressHUD
 
 protocol NewsUIViewDelegate: AnyObject {
     func searchEnding(text: String)
+    func newsItemTapped(news: ViewData)
 }
 
 class NewsUIView: UIView {
@@ -121,7 +122,8 @@ extension NewsUIView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier, for: indexPath) as! NewsTableViewCell
-        cell.textLabel?.text = self.result[indexPath.row].title
+//        cell.textLabel?.text = self.result[indexPath.row].title
+        cell.setupData(viewData: self.result[indexPath.row])
         return cell
     }
 
@@ -129,5 +131,12 @@ extension NewsUIView: UITableViewDataSource {
 }
 
 extension NewsUIView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        delegate?.newsItemTapped(news: self.result[indexPath.row])
+    }
 }

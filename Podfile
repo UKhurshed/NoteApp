@@ -20,6 +20,7 @@ target 'NoteApp' do
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'JGProgressHUD'
+  pod 'SDWebImage', '~> 5.0'
 
   # Pods for NoteApp
 

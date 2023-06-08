@@ -32,5 +32,11 @@
 "freedReference" = "The arc reference was nil";
 "serviceWasNil" = "Service instance was nil";
 
+"wrongURL" = "This url is not valid";
+
+"warningTitle" = "Warning!";
+"searchTextIsEmpty" = "Search text is empty, please enter correct data";
+"ok" = "Ok";
+
 
 
